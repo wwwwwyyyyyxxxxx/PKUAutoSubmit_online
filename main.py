@@ -44,5 +44,6 @@ if __name__ == '__main__':
     print('Driver Launched\n')
 
     go('config.ini')
+    go('config1.ini')
 
     driver_pjs.quit()
