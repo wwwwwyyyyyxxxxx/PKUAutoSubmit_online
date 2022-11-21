@@ -49,11 +49,11 @@ def login(driver, userName, password, retry=0):
         f'{iaaaUrl}?appID={appID}&appName={appName}&redirectUrl={redirectUrl}')
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, 'logon_button')))
-    driver.find_element_by_id('userName').send_keys(userName)
+    driver.find_element(By.ID, 'userName').send_keys(userName)
     time.sleep(0.1)
-    driver.find_element_by_id('password').send_keys(password)
+    driver.find_element(By.ID, 'password').send_keys(password)
     time.sleep(0.1)
-    driver.find_element_by_id('logon_button').click()
+    driver.find_element(By.ID, 'logon_button').click()
     try:
         WebDriverWait(driver,
                       10).until(EC.visibility_of_element_located((By.ID, 'all')))
@@ -68,7 +68,7 @@ def go_to_simso(driver):
     driver.execute_script("$(arguments[0]).click()", button)
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, 'tag_s_stuCampusExEnReq')))
-    driver.find_element_by_id('tag_s_stuCampusExEnReq').click()
+    driver.find_element(By.ID, 'tag_s_stuCampusExEnReq').click()
     time.sleep(2)
     driver.switch_to.window(driver.window_handles[-1])
     WebDriverWait(driver, 10).until(
@@ -90,20 +90,20 @@ def go_to_application_in(driver, userName, password):
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, 'el-card__body')))
         time.sleep(0.5)
-        driver.find_element_by_class_name('el-card__body').click()
+        driver.find_element(By.CLASS_NAME, 'el-card__body').click()
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, 'el-select')))
     except:
         print('检测到会话失效，重新登陆中...')
         login(driver, userName, password)
         go_to_simso(driver)
-        driver.find_element_by_class_name('el-card__body').click()
+        driver.find_element(By.CLASS_NAME, 'el-card__body').click()
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, 'el-select')))
 
 
 def select_in_out(driver, way):
-    driver.find_element_by_class_name('el-select').click()
+    driver.find_element(By.CLASS_NAME, 'el-select').click()
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located(
             (By.XPATH, f'//li/span[text()="{way}"]')))
@@ -111,77 +111,77 @@ def select_in_out(driver, way):
 
 
 def select_campus(driver, campus):
-    driver.find_elements_by_class_name('el-select')[1].click()
+    driver.find_elements(By.CLASS_NAME, 'el-select')[1].click()
     dropdown_handler(driver, f'//li/span[text()="{campus}"]')
 
 
 def write_reason(driver, reason):
-    driver.find_elements_by_class_name('el-select')[2].click()
+    driver.find_elements(By.CLASS_NAME, 'el-select')[2].click()
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located(
             (By.XPATH, f'//li/span[text()="{reason}"]')))
-    driver.find_element_by_xpath(f'//li/span[text()="{reason}"]').click()
+    driver.find_element(By.XPATH, f'//li/span[text()="{reason}"]').click()
 
 
 def select_destination(driver, destination):
-    driver.find_elements_by_class_name('el-select')[3].click()
+    driver.find_elements(By.CLASS_NAME, 'el-select')[3].click()
     dropdown_handler(driver, f'//li/span[text()="{destination}"]')
 
 
 def select_district(driver, district):
-    driver.find_elements_by_class_name('el-select')[4].click()
+    driver.find_elements(By.CLASS_NAME, 'el-select')[4].click()
     dropdown_handler(driver, xpath=f'//li/span[text()="{district}"]')
 
 
 def write_mail_address(driver, mail_address):
-    driver.find_elements_by_class_name('el-input__inner')[2].clear()
-    driver.find_elements_by_class_name('el-input__inner')[2].send_keys(
+    driver.find_elements(By.CLASS_NAME, 'el-input__inner')[2].clear()
+    driver.find_elements(By.CLASS_NAME, 'el-input__inner')[2].send_keys(
         f'{mail_address}')
     time.sleep(0.1)
 
 
 def write_phone_number(driver, phone_number):
-    driver.find_elements_by_class_name('el-input__inner')[3].clear()
-    driver.find_elements_by_class_name('el-input__inner')[3].send_keys(
+    driver.find_elements(By.CLASS_NAME, 'el-input__inner')[3].clear()
+    driver.find_elements(By.CLASS_NAME, 'el-input__inner')[3].send_keys(
         f'{phone_number}')
     time.sleep(0.1)
 
 
 def write_reason_detail(driver, detail):
-    driver.find_element_by_class_name('el-textarea__inner').send_keys(
+    driver.find_element(By.CLASS_NAME, 'el-textarea__inner').send_keys(
         f'{detail}')
     time.sleep(0.1)
 
 
 def write_track(driver, track):
-    driver.find_elements_by_class_name('el-textarea__inner')[1].send_keys(
+    driver.find_elements(By.CLASS_NAME, 'el-textarea__inner')[1].send_keys(
         f'{track}')
     time.sleep(0.1)
 
 
 def write_street(driver, street):
-    driver.find_elements_by_class_name('el-textarea__inner')[1].send_keys(
+    driver.find_elements(By.CLASS_NAME, 'el-textarea__inner')[1].send_keys(
         f'{street}')
     time.sleep(0.1)
 
 
 def click_check(driver):
-    driver.find_element_by_class_name('el-checkbox__label').click()
+    driver.find_element(By.CLASS_NAME, 'el-checkbox__label').click()
     time.sleep(0.1)
 
 
 def click_inPeking(driver):
-    driver.find_element_by_class_name('el-radio__inner').click()
+    driver.find_element(By.CLASS_NAME, 'el-radio__inner').click()
     time.sleep(0.1)
 
 
 def submit(driver):
-    driver.find_element_by_xpath(
+    driver.find_element(By.XPATH,
         '//button/span[contains(text(),"保存")]').click()
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located(
             (By.XPATH, '(//button/span[contains(text(),"提交")])[3]')))
-    driver.find_element_by_xpath(
+    driver.find_element(By.XPATH,
         '(//button/span[contains(text(),"提交")])[3]').click()
     time.sleep(0.1)
 
