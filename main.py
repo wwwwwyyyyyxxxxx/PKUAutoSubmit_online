@@ -49,7 +49,7 @@ def login(driver, userName, password, retry=0):
         f'{iaaaUrl}?appID={appID}&appName={appName}&redirectUrl={redirectUrl}')
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, 'logon_button')))
-    driver.find_element_by_id('user_name').send_keys(userName)
+    driver.find_element_by_id('userName').send_keys(userName)
     time.sleep(0.1)
     driver.find_element_by_id('password').send_keys(password)
     time.sleep(0.1)
