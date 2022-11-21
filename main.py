@@ -64,7 +64,7 @@ def login(driver, userName, password, retry=0):
 
 
 def go_to_simso(driver):
-    button = driver.find_element_by_id('all')
+    button = driver.find_element(By.Id, 'all')
     driver.execute_script("$(arguments[0]).click()", button)
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, 'tag_s_stuCampusExEnReq')))
@@ -77,7 +77,7 @@ def go_to_simso(driver):
 
 def go_to_application_out(driver):
     go_to_simso(driver)
-    driver.find_element_by_class_name('el-card__body').click()
+    driver.find_element(By.CLASS_NAME, 'el-card__body').click()
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.CLASS_NAME, 'el-select')))
 
@@ -107,7 +107,7 @@ def select_in_out(driver, way):
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located(
             (By.XPATH, f'//li/span[text()="{way}"]')))
-    driver.find_element_by_xpath(f'//li/span[text()="{way}"]').click()
+    driver.find_element(By.XPATH, f'//li/span[text()="{way}"]').click()
 
 
 def select_campus(driver, campus):
